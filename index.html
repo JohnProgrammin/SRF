@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="description" content="Stay Relevant Fashion - Luxury fashion boutique offering exclusive high-end clothing collections. Discover our premium brand with timeless elegance and modern sophistication.">
     <meta name="keywords" content="luxury fashion, high-end clothing, boutique brand, designer wear, premium apparel, black gold fashion">
     <meta name="author" content="Stay Relevant Fashion">
@@ -153,6 +153,62 @@
         .music-player:hover {
             transform: scale(1.05);
         }
+        /*RESPONSIVE*/
+        /* Add this to your <style> section */
+@media (max-width: 767px) {
+    /* Adjust hamburger icon positioning */
+    .hamburger {
+        z-index: 100;
+        position: relative;
+    }
+    
+    /* Mobile menu full-screen takeover */
+    #mobile-menu {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    #mobile-menu.active {
+        transform: translateX(0);
+    }
+}
+        @media (max-width: 767px) {
+    /* Music player */
+    .music-player {
+        bottom: 80px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Back-to-top button */
+    #back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* WhatsApp button (if added) */
+    .whatsapp-float {
+        bottom: 140px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+}
     </style>
 </head>
 <body class="bg-primary text-white font-poppins overflow-x-hidden">
@@ -648,12 +704,16 @@
         const mobileMenu = document.getElementById('mobile-menu');
         
         menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('active');
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('scale-y-100');
-            mobileMenu.classList.toggle('scale-y-0');
-        });
-        
+    menuBtn.classList.toggle('active');
+    mobileMenu.classList.toggle('active'); // Changed from scale-y toggle
+});
+        // Close menu when clicking links
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        menuBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+    });
+});
         // Close mobile menu when clicking a link
         document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', () => {
